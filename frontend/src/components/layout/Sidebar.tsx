@@ -18,31 +18,12 @@ interface SidebarProps {
 }
 
 const navItems = [
-  {
-    label: 'Dashboard',
-    icon: LayoutDashboard,
-    path: '/dashboard'
-  },
-  {
-    label: 'Projects',
-    icon: FolderKanban,
-    path: '/projects'
-  },
-  {
-    label: 'Tasks',
-    icon: CheckSquare,
-    path: '/tasks'
-  },
-  {
-    label: 'Analytics',
-    icon: BarChart3,
-    path: '/analytics'
-  },
-  {
-    label: 'Settings',
-    icon: Settings,
-    path: '/settings'
-  }
+  { label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
+  { label: 'Projects', icon: FolderKanban, path: '/projects' },
+  { label: 'Tasks', icon: CheckSquare, path: '/tasks' },
+  { label: 'Kanban', icon: Kanban, path: '/kanban' },
+  { label: 'Analytics', icon: BarChart3, path: '/analytics' },
+  { label: 'Settings', icon: Settings, path: '/settings' }
 ]
 
 const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
