@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import authRoutes from './routes/auth.routes'
 import projectRoutes from './routes/project.routes' 
 import taskRoutes from './routes/task.routes' 
+import dashboardRoutes from './routes/dashboard.routes'
 
 dotenv.config()
 
@@ -21,6 +22,7 @@ app.use('/api/tasks', taskRoutes)
 // Routes
 app.use('/api/auth', authRoutes)
 app.use('/api/projects', projectRoutes)   
+app.use('/api/dashboard', dashboardRoutes)  
 // Health check
 app.get('/', (req, res) => {
   res.json({
