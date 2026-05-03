@@ -7,7 +7,8 @@ import {
   Settings,
   LogOut,
   Zap,
-  X
+  X,
+ KanbanSquare
 } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import toast from 'react-hot-toast'
@@ -21,7 +22,7 @@ const navItems = [
   { label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
   { label: 'Projects', icon: FolderKanban, path: '/projects' },
   { label: 'Tasks', icon: CheckSquare, path: '/tasks' },
-  { label: 'Kanban', icon: Kanban, path: '/kanban' },
+  { label: 'Kanban', icon: KanbanSquare, path: '/kanban' },
   { label: 'Analytics', icon: BarChart3, path: '/analytics' },
   { label: 'Settings', icon: Settings, path: '/settings' }
 ]

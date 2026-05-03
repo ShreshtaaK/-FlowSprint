@@ -35,7 +35,10 @@ const KanbanPage = () => {
     }
   }
 
-  useEffect(() => { fetchTasks() }, [])
+  useEffect(() => {
+  const load = async () => { await fetchTasks() }
+  load()
+}, [])
 
   const getTasksByStatus = (status: TaskStatus) =>
     tasks.filter(t => t.status === status)

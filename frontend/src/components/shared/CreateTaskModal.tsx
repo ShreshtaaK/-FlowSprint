@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { X } from 'lucide-react'
@@ -32,11 +32,11 @@ const CreateTaskModal = ({ onClose, onCreated }: Props) => {
   const {
     register,
     handleSubmit,
-    watch,
+    control,
     formState: { errors }
   } = useForm<FormData>({ resolver: zodResolver(schema) })
 
-  const selectedProjectId = watch('projectId')
+  const selectedProjectId = useWatch({ control, name: 'projectId' })
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -47,16 +47,18 @@ const CreateTaskModal = ({ onClose, onCreated }: Props) => {
   }, [])
 
   useEffect(() => {
-    if (selectedProjectId) {
-      const project = projects.find(p => p.id === selectedProjectId)
-      if (project) {
-        setMembers(project.members.map(m => ({
-          id: m.user.id,
-          name: m.user.name
-        })))
-      }
+  if (!selectedProjectId) return
+  const project = projects.find(p => p.id === selectedProjectId)
+  if (project) {
+    const load = () => {
+      setMembers(project.members.map(m => ({
+        id: m.user.id,
+        name: m.user.name
+      })))
     }
-  }, [selectedProjectId, projects])
+    load()
+  }
+}, [selectedProjectId, projects])
 
   const onSubmit = async (data: FormData) => {
     try {

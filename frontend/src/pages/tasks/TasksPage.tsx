@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Plus, CheckSquare } from 'lucide-react'
 import toast from 'react-hot-toast'
 import DashboardLayout from '../../components/layout/DashboardLayout'
@@ -30,7 +30,7 @@ const TasksPage = () => {
   const [statusFilter, setStatusFilter] = useState('ALL')
   const [priorityFilter, setPriorityFilter] = useState('ALL')
 
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     try {
       setIsLoading(true)
       const data = await getTasksApi({
@@ -43,9 +43,12 @@ const TasksPage = () => {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [statusFilter, priorityFilter])
 
-  useEffect(() => { fetchTasks() }, [statusFilter, priorityFilter])
+  useEffect(() => {
+    const load = async () => { await fetchTasks() }
+    load()
+  }, [fetchTasks])
 
   const handleStatusChange = async (taskId: string, status: string) => {
     try {

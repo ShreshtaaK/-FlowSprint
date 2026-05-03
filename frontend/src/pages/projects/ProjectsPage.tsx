@@ -9,7 +9,6 @@ import type { Project } from '../../types'
 
 const ProjectsPage = () => {
   const [projects, setProjects] = useState<Project[]>([])
-  const [filtered, setFiltered] = useState<Project[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
   const [search, setSearch] = useState('')
@@ -19,7 +18,6 @@ const ProjectsPage = () => {
       setIsLoading(true)
       const data = await getProjectsApi()
       setProjects(data.projects)
-      setFiltered(data.projects)
     } catch {
       toast.error('Failed to load projects')
     } finally {
@@ -28,21 +26,16 @@ const ProjectsPage = () => {
   }
 
   useEffect(() => {
-    fetchProjects()
+    const load = async () => { await fetchProjects() }
+    load()
   }, [])
 
-  useEffect(() => {
-    if (search.trim() === '') {
-      setFiltered(projects)
-    } else {
-      setFiltered(
-        projects.filter(p =>
-          p.name.toLowerCase().includes(search.toLowerCase()) ||
-          p.description.toLowerCase().includes(search.toLowerCase())
-        )
+  const filtered = search.trim() === ''
+    ? projects
+    : projects.filter(p =>
+        p.name.toLowerCase().includes(search.toLowerCase()) ||
+        p.description.toLowerCase().includes(search.toLowerCase())
       )
-    }
-  }, [search, projects])
 
   const handleDelete = async (id: string) => {
     if (!window.confirm('Are you sure you want to delete this project?')) return
