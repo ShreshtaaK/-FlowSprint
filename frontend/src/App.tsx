@@ -6,6 +6,7 @@ import PublicRoute from './routes/PublicRoute'
 import LoginPage from './pages/auth/LoginPage'
 import RegisterPage from './pages/auth/RegisterPage'
 import DashboardPage from './pages/dashboard/DashboardPage'
+import ProjectsPage from './pages/projects/ProjectsPage'
 
 function App() {
   return (
@@ -25,27 +26,19 @@ function App() {
           <Route path="/" element={<Navigate to="/dashboard" />} />
           <Route
             path="/login"
-            element={
-              <PublicRoute>
-                <LoginPage />
-              </PublicRoute>
-            }
+            element={<PublicRoute><LoginPage /></PublicRoute>}
           />
           <Route
             path="/register"
-            element={
-              <PublicRoute>
-                <RegisterPage />
-              </PublicRoute>
-            }
+            element={<PublicRoute><RegisterPage /></PublicRoute>}
           />
           <Route
             path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <DashboardPage />
-              </ProtectedRoute>
-            }
+            element={<ProtectedRoute><DashboardPage /></ProtectedRoute>}
+          />
+          <Route
+            path="/projects"
+            element={<ProtectedRoute><ProjectsPage /></ProtectedRoute>}
           />
         </Routes>
       </AuthProvider>
