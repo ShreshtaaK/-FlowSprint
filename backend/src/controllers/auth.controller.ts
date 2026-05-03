@@ -54,6 +54,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
       }
     })
   } catch (error) {
+    console.error('Registration error:', error)
     res.status(500).json({ message: 'Server error during registration' })
   }
 }
@@ -101,6 +102,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       }
     })
   } catch (error) {
+    console.error('Login error:', error)
     res.status(500).json({ message: 'Server error during login' })
   }
 }
@@ -126,6 +128,7 @@ export const getMe = async (req: AuthRequest, res: Response): Promise<void> => {
 
     res.status(200).json({ user })
   } catch (error) {
+    console.error('GetMe error:', error)
     res.status(500).json({ message: 'Server error' })
   }
 }
